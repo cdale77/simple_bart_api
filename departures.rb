@@ -4,6 +4,7 @@ require 'json'
 #require 'pry'
 
 get "/departures/:station_name" do
+  response['Access-Control-Allow-Origin'] = '*'
   "you wanted station #{params[:station_name]}"
   departure_array = Bart(abbr: params[:station_name].to_sym).departures
   response = {}
