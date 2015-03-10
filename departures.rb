@@ -1,5 +1,6 @@
 require 'sinatra'
 require 'bart'
+require 'json'
 #require 'pry'
 
 get "/departures/:station_name" do
