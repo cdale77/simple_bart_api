@@ -20,7 +20,7 @@ get "/departures/:station_name" do
     #response.merge!(departure_hash)
     response[index] = departure_hash
   end
-  response.to_s
+  response.to_json
 end
 
 
