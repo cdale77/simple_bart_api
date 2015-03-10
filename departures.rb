@@ -1,6 +1,6 @@
 require 'sinatra'
 require 'bart'
-require 'pry'
+#require 'pry'
 
 get "/departures/:station_name" do
   "you wanted station #{params[:station_name]}"
