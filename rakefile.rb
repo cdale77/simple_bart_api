@@ -1,3 +1,3 @@
 task :wakeup do
-  puts "hello"
+  sleep 1
 end
