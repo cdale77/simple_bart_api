@@ -2,7 +2,7 @@ require 'sinatra'
 require 'bart'
 require 'json'
 require 'httparty'
-require 'pry'
+#require 'pry'
 
 get "/departures/:station1" do
   response['Access-Control-Allow-Origin'] = '*'
