@@ -1,12 +1,13 @@
 require 'sinatra'
 require 'bart'
 require 'json'
-#require 'pry'
+require 'httparty'
+require 'pry'
 
-get "/departures/:station_name" do
+get "/departures/:station1" do
   response['Access-Control-Allow-Origin'] = '*'
-  "you wanted station #{params[:station_name]}"
-  departure_array = Bart(abbr: params[:station_name].to_sym).departures
+  "you wanted station #{params[:station1]}"
+  departure_array = Bart(abbr: params[:station1].to_sym).departures
   response = {}
   departure_array.each_with_index do |departure, index|
     departure_hash = {}
@@ -25,4 +26,16 @@ get "/departures/:station_name" do
   response.to_json
 end
 
+get "/routes" do
+  response['Access-Control-Allow-Origin'] = '*'
+  url = "http://api.bart.gov/api/sched.aspx?cmd=depart&" +
+    "orig=#{params[:station1]}&dest=#{params[:station2]}&" +
+    "date=now&key=MW9S-E7SL-26DU-VV8V"
+  response = HTTParty.get(url)
+  begin
+    response["root"]["schedule"]["request"]["trip"][0].to_json
+  rescue
+    "error"
+  end
+end
 

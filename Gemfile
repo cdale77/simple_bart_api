@@ -5,6 +5,7 @@ gem 'sinatra'
 gem 'bart'
 gem 'json'
 gem 'rake'
+gem 'httparty'
 
 group :development do
 #  gem 'pry'
