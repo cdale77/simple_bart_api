@@ -2,7 +2,6 @@ require 'sinatra'
 require 'bart'
 require 'json'
 require 'httparty'
-#require 'pry'
 
 get "/departures/:station1" do
   response['Access-Control-Allow-Origin'] = '*'
@@ -11,13 +10,14 @@ get "/departures/:station1" do
   departure_array.each_with_index do |departure, index|
     departure_hash = {}
     departure_hash[:destination_name] = departure.destination.name
+    departure_hash[:estimates] = []
     departure.estimates.each do |estimate|
       estimate_hash = {}
       estimate_hash[:direction] = estimate.direction
       estimate_hash[:length] = estimate.length
       estimate_hash[:minutes] = estimate.minutes
       estimate_hash[:platform] = estimate.platform
-      departure_hash[:estimates] = estimate_hash
+      departure_hash[:estimates] << estimate_hash
     end
     response[index] = departure_hash
   end
@@ -36,4 +36,3 @@ get "/routes" do
     "error"
   end
 end
-
